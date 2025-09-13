@@ -1,46 +1,174 @@
-# Getting Started with Create React App
+# 📚 Code Snippets Explorer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A responsive React + Tailwind app for browsing, searching, and organizing reusable code snippets across multiple languages and categories.  
 
-## Available Scripts
+Features:
 
-In the project directory, you can run:
+- 🚀 **Dynamic Tabs** → sections auto-loaded from `snippets/sections/*.ts` or `snippets/markdown/**/*.md`
+- 🔍 **Search** → filter snippets by title or code content
+- 📑 **Markdown Rendering** → supports syntax highlighting (Monokai theme), GFM tables/lists, and Mermaid diagrams
+- 🗂 **Grid Layout** → responsive grid that adapts to screen size; compact design for hundreds of snippets
+- 📋 **Copy & Maximize** → one-click copy to clipboard and fullscreen modal view
+- 📱 **Responsive** → works seamlessly on desktop, tablet, and mobile
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 🛠️ Tech Stack
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- React (CRA)
+- Tailwind CSS
+- @tailwindcss/typography
+- react-markdown + remark-gfm
+- rehype-highlight
+- mermaid
+- TypeScript
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 📂 Project Structure
 
-### `npm run build`
+```
+src/
+├── App.tsx
+├── index.tsx
+├── styles/
+│   └── index.css
+│
+├── components/
+│   ├── CodeSnippetsApp.tsx
+│   ├── SnippetCard.tsx
+│   ├── Markdown.tsx
+│   ├── Modal.tsx
+│   └── ui/
+│
+├── snippets/
+│   ├── types.ts
+│   ├── index.ts
+│   ├── mdLoader.ts
+│   └── sections/
+│       ├── bash.ts
+│       ├── js.ts
+│       ├── diagrams.ts
+│       └── ...
+│
+├── hooks/
+│   └── useClipboard.ts
+│
+├── utils/
+│   ├── extractText.ts
+│   ├── urlParams.ts
+│   └── ...
+│
+└── types/
+    └── require-context.d.ts
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🚀 Getting Started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+# install dependencies
+npm install
 
-### `npm run eject`
+# start dev server
+npm start
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# build for production
+npm run build
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## ✍️ Adding Snippets
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### TypeScript files (`snippets/sections/`)
+```ts
+import type { Section } from "../types";
 
-## Learn More
+const section: Section = {
+  id: "js",
+  label: "JavaScript",
+  snippets: [
+    {
+      id: "debounce",
+      title: "Debounce",
+      markdown: `
+\`\`\`js
+export function debounce(fn, delay = 250) {
+  let t;
+  return (...args) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn(...args), delay);
+  };
+}
+\`\`\`
+      `,
+    },
+  ],
+};
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+export default section;
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Markdown files (`snippets/markdown/`)
+```
+snippets/markdown/js/debounce.md
+snippets/markdown/bash/find-files.md
+```
+
+Example:
+
+```md
+# Debounce
+
+\`\`\`js
+export function debounce(fn, delay = 250) {
+  let t;
+  return (...args) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn(...args), delay);
+  };
+}
+\`\`\`
+```
+
+---
+
+## 🔎 Search & URL Params
+
+- `?tab=js` → open directly to JavaScript tab  
+- `?q=debounce` → pre-fill search box
+
+---
+
+## 📊 Mermaid Diagrams
+
+````md
+```mermaid
+flowchart LR
+  Client -->|HTTP| API
+  API --> DB[(Postgres)]
+```
+````
+
+---
+
+## 📋 Copy & Maximize
+
+- **Copy** → copies first code block (or entire markdown)  
+- **Maximize** → opens snippet in fullscreen modal  
+
+---
+
+## 📱 Responsive Design
+
+- Grid auto-adjusts with `minmax`  
+- Compact card layout for hundreds of snippets  
+- Works on desktop, tablet, and mobile  
+
+---
+
+## 📜 License
+
+MIT — free to use and modify.
