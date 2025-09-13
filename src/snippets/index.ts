@@ -1,5 +1,7 @@
 import type { Section, Snippet } from "../types/types";
 
+import { loadSectionsFromMd } from "../snippets/mdLoader";
+
 // Only load files from ./sections (so we don't include index.ts)
 const ctx = (require as any).context("./sections", false, /\.ts$/);
 
@@ -29,4 +31,20 @@ const sections: Section[] = ctx.keys()
   .filter((s: Section) => s && s.id && s.label && Array.isArray(s.snippets))
   .sort((a: Section, b: Section) => a.label.localeCompare(b.label));
 
-export default sections;
+const data = await loadSectionsFromMd();
+
+if(data){
+  sections.map(section => {
+    if(data?.[section.id]){
+      section.snippets.map(s => {
+        if(data?.[section.id]?.[s.title]){
+          s.markdown = section.identifier ? normalizeMarkdown(data?.[section.id]?.[s.title], section.identifier) : data?.[section.id]?.[s.title]
+        }
+        return s
+      })
+    }
+    return section
+  })
+}
+export default sections
+
