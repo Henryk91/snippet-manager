@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Markdown } from "./Markdown";
-import { Snippet } from "../snippets/types";
+import { Snippet } from "../types/types";
 import { copyToClipboard } from "../utils/utils";
 import { extractFirstFence } from "../utils/extractText";
 
@@ -19,6 +19,7 @@ export default function SnippetCard({ snippet, onMax }: { snippet: Snippet; onMa
   return (
     <div className="flex min-w-0 flex-col gap-2 rounded-xl border border-white/10 bg-zinc-900/70 p-3 shadow-sm hover:border-white/20">
       <div className="text-xs font-medium text-white/80 truncate">{snippet.title}</div>
+      {snippet.description && (<div className="prose prose-invert prose-tight max-w-none text-[12px] -mb-1">{snippet.description}</div>)}
       <div
         className={compact ? "prose prose-invert prose-tight max-w-none text-[12px]" : "prose prose-invert max-w-none"}
       >

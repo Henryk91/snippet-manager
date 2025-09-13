@@ -1,14 +1,13 @@
-import type { Section } from "../types";
+import type { RawSection } from "../../types/types";
 
-const section: Section = {
-    id: "js",
-    label: "JavaScript",
-    snippets: [
-      {
-        id: "js1",
-        title: "Debounce",
-        markdown: `
-\`\`\`js
+const section: RawSection = {
+  id: "js",
+  label: "JavaScript",
+  identifier: "js",
+  snippets: [
+    {
+      title: "Debounce",
+      markdown: `
 export function debounce(fn, delay = 250) {
   let t;
   return (...args) => {
@@ -16,14 +15,11 @@ export function debounce(fn, delay = 250) {
     t = setTimeout(() => fn(...args), delay);
   };
 }
-\`\`\`
 `,
-      },
-      {
-        id: "js2",
-        title: "Fisher–Yates Shuffle",
-        markdown: `
-\`\`\`js
+    },
+    {
+      title: "Fisher-Yates Shuffle",
+      markdown: `
 export function shuffle(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -32,10 +28,9 @@ export function shuffle(arr) {
   }
   return a;
 }
-\`\`\`
 `,
-      },
-    ],
-  };
+    },
+  ],
+};
 
 export default section;

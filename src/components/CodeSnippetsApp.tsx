@@ -43,7 +43,7 @@ export default function CodeSnippetsApp() {
     const query = q.trim().toLowerCase();
     if (!query) return current.snippets;
     return current.snippets.filter(
-      (s) => s.title.toLowerCase().includes(query) || s.markdown.toLowerCase().includes(query)
+      (s) => s.title.toLowerCase().includes(query) || s.markdown.toLowerCase().includes(query) || s.description?.toLowerCase().includes(query)
     );
   }, [current, q]);
 
@@ -123,6 +123,7 @@ export default function CodeSnippetsApp() {
         {maxSnip && (
           <div className="flex flex-col gap-4">
             <div className="text-xl font-semibold">{maxSnip.title}</div>
+            {maxSnip.description && (<div className="prose prose-invert max-w-none">{maxSnip.description}</div>)}
             <div className="prose prose-invert max-w-none">
               <Markdown markdown={maxSnip.markdown} />
             </div>
