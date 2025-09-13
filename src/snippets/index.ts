@@ -3,6 +3,15 @@ import type { Section, Snippet } from "../types/types";
 // Only load files from ./sections (so we don't include index.ts)
 const ctx = (require as any).context("./sections", false, /\.ts$/);
 
+function normalizeMarkdown(md: string, identifier: string): string {
+  const newLine = md.startsWith("\n")? "": "\n"
+  // eslint-disable-next-line
+  const ret = `${"\`\`\`"}${identifier}${newLine}${md}`
+    .replace(/\r\n/g, "\n") // unify line endings
+    .trim();
+  return ret
+}
+
 const sections: Section[] = ctx.keys()
   .map((key: string) => {
     const mod = ctx(key);
@@ -10,8 +19,7 @@ const sections: Section[] = ctx.keys()
       mod.default.snippets.map((s: Snippet, i: number) => {
         s.id = `${mod.default.id}${i}`
         if(mod.default.identifier){
-          // eslint-disable-next-line
-          s.markdown = `${"\`\`\`"}${mod.default.identifier}${s.markdown}${"\`\`\`"}`
+          s.markdown = normalizeMarkdown(s.markdown, mod.default.identifier)
         }
         return s
       })

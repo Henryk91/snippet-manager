@@ -8,15 +8,12 @@ const section: RawSection = {
     {
       title: "Find files by name",
       description: "Quickly find files recursively:",
-      markdown: `
-find . -type f -name "*.log" -not -path "*/node_modules/*"
-`,
+      markdown: `find . -type f -name "*.log" -not -path "*/node_modules/*"`,
     },
     {
       title: "cURL JSON POST",
       description: "Send JSON via POST and pretty-print response:",
-      markdown: `
-curl -s -X POST https://httpbin.org/post \\
+      markdown: `curl -s -X POST https://httpbin.org/post \\
   -H 'Content-Type: application/json' \\
   -d '{"hello":"world"}' | jq
 `,
