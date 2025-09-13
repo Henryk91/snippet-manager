@@ -84,7 +84,10 @@ const PreBlock: FC<PreProps> = (props) => {
   }
 
   return (
-    <pre {...props} className={["hljs", preClass].filter(Boolean).join(" ")}>
+    <pre
+      {...props}
+      className={["hljs", preClass, "overflow-x-auto whitespace-pre rounded-lg p-2"].filter(Boolean).join(" ")}
+    >
       {props.children}
     </pre>
   );

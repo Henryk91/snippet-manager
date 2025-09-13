@@ -108,8 +108,8 @@ export default function CodeSnippetsApp() {
           <div className="text-white/60">No snippets match your search.</div>
         ) : (
           <div
-            className="grid auto-rows-max gap-4"
-            style={{ gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))" }}
+            className="grid auto-rows-max gap-2 sm:gap-3"
+            style={{ gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))" }}
           >
             {filtered.map((snip) => (
               <SnippetCard key={snip.id} snippet={snip} onMax={(s) => setMaxSnip(s)} />
