@@ -5,6 +5,7 @@ import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import { extractText } from "../utils/extractText";
+import "highlight.js/styles/monokai.css";
 
 type PreProps = ComponentProps<"pre"> & { children?: ReactNode };
 
