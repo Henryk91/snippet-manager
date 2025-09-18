@@ -1,11 +1,29 @@
 import mermaid from "mermaid";
-import { Children, ComponentProps, FC, HTMLAttributes, ReactNode, useEffect, useId, useRef } from "react";
+import { Children, ComponentProps, FC, HTMLAttributes,  ReactNode, useEffect, useId, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
-import { extractText } from "../utils/extractText";
+import { colorizeCliToNodes, extractText, hasLang } from "../utils/extractText";
 import "highlight.js/styles/monokai.css";
+
+const SpanPart = (key: string, className: string, value: string) => {
+  return (
+    <span className={className} key={key}>{value}</span>
+  );
+};
+
+const Code = ({ inline, className, children, ...rest }: CodeProps) => {
+  if (inline || !hasLang(className, "bash", "cli")) {
+    return <code className={className} {...rest}>{children}</code>;
+  }
+
+  return (
+    <code className={`${className || ""} hljs`} {...rest}>
+      {colorizeCliToNodes(children, SpanPart)}
+    </code>
+  );
+};
 
 type PreProps = ComponentProps<"pre"> & { children?: ReactNode };
 
@@ -102,11 +120,7 @@ export function Markdown({ markdown }: { markdown: string }) {
       rehypePlugins={[rehypeRaw, rehypeHighlight]}
       components={{
         pre: PreBlock,
-        code: (({ inline, className, children, ...rest }: CodeProps) => (
-          <code className={className} {...rest}>
-            {children}
-          </code>
-        )) as FC<CodeProps>,
+        code: Code
       }}
     />
   );
