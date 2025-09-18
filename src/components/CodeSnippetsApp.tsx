@@ -64,7 +64,7 @@ export default function CodeSnippetsApp() {
     <div className="min-h-screen w-full bg-zinc-950 text-white">
       {/* Top bar */}
       <div className="sticky top-0 z-40 border-b border-white/10 bg-zinc-950/80 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-3 px-4 py-3">
+        <div className="mx-auto flex flex-col md:flex-row max-w-7xl flex-wrap items-center gap-3 px-4 py-3">
           {/* Tabs */}
           <nav className="flex flex-1 flex-wrap items-center gap-2">
             {sections.map((s) => (
