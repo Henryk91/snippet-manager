@@ -7,7 +7,7 @@ import { Markdown } from "./Markdown";
 import { Modal } from "./Modal";
 import SnippetCard from "./SnippetCard";
 import { getParam, setParam } from "../utils/urlParams";
-import { classNames } from "../utils/utils";
+import { classNames, logUse } from "../utils/utils";
 
 export default function CodeSnippetsApp() {
   const [sections] = useState<Section[]>(sectionsFromDisk);
@@ -48,6 +48,7 @@ export default function CodeSnippetsApp() {
   }, [current, q]);
 
   useEffect(() => {
+    logUse();
     const urlQ = getParam("q");
     if (urlQ) setQ(urlQ);
   }, []);
