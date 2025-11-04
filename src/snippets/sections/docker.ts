@@ -145,6 +145,7 @@ docker compose down`,
     },
     {
       title: "Compose (web + Postgres)",
+      identifier: "yaml",
       description: "App with DB, volumes, healthcheck, env:",
       markdown: `# docker-compose.yml
 services:
@@ -179,6 +180,7 @@ volumes:
     {
       title: "Compose overrides",
       description: "Use an extra file for dev-only changes:",
+      identifier: "yaml",
       markdown: `# docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 
 # docker-compose.dev.yml
@@ -192,6 +194,7 @@ services:
     },
     {
       title: "Compose profiles",
+      identifier: "yaml",
       description: "Optionally start extra services (e.g., monitoring):",
       markdown: `# docker compose --profile monitor up -d
 
@@ -206,6 +209,7 @@ services:
     {
       title: "Named networks",
       description: "Communicate across multiple stacks safely:",
+      identifier: "yaml",
       markdown: `# docker-compose.yml
 networks:
   backend:

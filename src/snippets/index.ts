@@ -21,7 +21,7 @@ const sections: Section[] = ctx.keys()
       mod.default.snippets.map((s: Snippet, i: number) => {
         s.id = `${mod.default.id}${i}`
         if(mod.default.identifier){
-          s.markdown = normalizeMarkdown(s.markdown, mod.default.identifier)
+          s.markdown = normalizeMarkdown(s.markdown, s.identifier? s.identifier: mod.default.identifier)
         }
         return s
       })

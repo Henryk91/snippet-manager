@@ -3,10 +3,11 @@ import { RawSection } from "../../types/types";
 const section: RawSection = {
   id: "python",
   label: "Python",
-  identifier: "bash",
+  identifier: "python",
   snippets: [
     {
       title: "Create & activate venv",
+      identifier: "bash",
       description: "Isolated environment with stdlib venv:",
       markdown: `python -m venv .venv
 # macOS/Linux:
@@ -16,12 +17,14 @@ source .venv/bin/activate
     },
     {
       title: "Install & freeze deps",
+      identifier: "bash",
       description: "Install packages and pin exact versions:",
       markdown: `pip install requests pytest
 pip freeze > requirements.txt`,
     },
     {
       title: "Format & lint",
+      identifier: "bash",
       description: "Auto-format and lint (Black + Ruff):",
       markdown: `pip install black ruff
 black .
@@ -286,12 +289,14 @@ print(dsn, debug)`,
     },
     {
       title: "Run tests (pytest)",
+      identifier: "bash",
       description: "Quick TDD loop with pytest:",
       markdown: `pip install pytest
 pytest -q`,
     },
     {
       title: "Package in editable mode",
+      identifier: "bash",
       description: "Install your package locally for dev:",
       markdown: `pip install -e .`,
     },
