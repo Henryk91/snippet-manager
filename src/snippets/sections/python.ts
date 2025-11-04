@@ -447,18 +447,72 @@ print(squared, evens)`,
     },
     {
       title: "Decorators",
-      description: "Wrap functions to extend behavior:",
+      description: "A basic decorator that logs before and after a function call.",
       markdown: `def log_call(fn):
     def wrapper(*args, **kwargs):
-        print("Calling", fn.__name__)
-        return fn(*args, **kwargs)
+        print(f"Calling function: {fn.__name__}")
+        result = fn(*args, **kwargs)
+        print(f"Finished calling: {fn.__name__}")
+        return result
     return wrapper
 
 @log_call
 def greet(name):
-    print("Hello", name)
+    print(f"Hello, {name}!")
 
-greet("Alice")`,
+
+@log_call
+def add(a, b):
+    return a + b
+
+
+# Example usage
+greet("Alice")
+result = add(5, 3)
+print("Result:", result)
+
+# Output:
+# Calling function: greet
+# Hello, Alice!
+# Finished calling: greet
+# Calling function: add
+# Finished calling: add
+# Result: 8`,
+    },
+    {
+      title: "Decorator that logs function name and arguments",
+      description: "A simple decorator that prints the function name and its arguments before running it.",
+      markdown: `def log_call(fn):
+    def wrapper(*args, **kwargs):
+        print(f"Calling {fn.__name__} with args={args}, kwargs={kwargs}")
+        result = fn(*args, **kwargs)
+        print(f"Finished {fn.__name__}")
+        return result
+    return wrapper
+
+
+@log_call
+def greet(name):
+    print(f"Hello, {name}!")
+
+
+@log_call
+def add(a, b):
+    return a + b
+
+
+# Example usage
+greet("Alice")
+result = add(5, 3)
+print("Result:", result)
+
+# Output:
+# Calling greet with args=('Alice',), kwargs={}
+# Hello, Alice!
+# Finished greet
+# Calling add with args=(5, 3), kwargs={}
+# Finished add
+# Result: 8`,
     },
     {
       title: "Itertools & generators",
