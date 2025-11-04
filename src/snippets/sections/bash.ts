@@ -18,6 +18,15 @@ const section: RawSection = {
   -d '{"hello":"world"}' | jq
 `,
     },
+    {
+      title: "Create Python virtual environment",
+      markdown: `python3 -m venv .venv; source .venv/bin/activate
+`,
+    },
+    {
+      title: "Create Python Requirements file",
+      markdown: `pip freeze >> requirements.txt`,
+    },
   ],
 };
 
